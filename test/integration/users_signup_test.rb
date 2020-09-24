@@ -21,8 +21,9 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     #makes sure we get the right template when the POST is invalid 
     assert_template "users/new"
     # goes into the users/ new and checks for the errors partial rendering by selecting divs 
-   assert_select 'div#error-explenation '
-   assert_select 'div.form-control '
+   assert_select 'div#error-explenation' 
+   assert_select 'div.field_with_errors'
+  
   end 
   
   test "valid signup information" do
@@ -38,8 +39,8 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   end 
   follow_redirect!
   assert_template 'users/show'
-  assert_not flash.danger
-  assert_not assert_select 'div#error-explenation'
-
+  assert_not flash[:danger] #undefined method 
+  # asserts that the assert error elemts are not being shown
+   assert_select 'div#error-explenation', false
 end
 end
