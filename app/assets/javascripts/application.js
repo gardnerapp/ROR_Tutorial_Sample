@@ -8,3 +8,6 @@
 // compiled file. JavaScript code in this file should be added after the last require_* statement.
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
+
+require("jquery")
+import "bootstrap"

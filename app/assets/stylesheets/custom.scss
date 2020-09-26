@@ -117,8 +117,28 @@ footer{
     float: left;
     margin-left: 15px;}
 }
-    
+
 }
+
+@media (max-width: 800px){
+    footer{
+        small{
+            display: block;
+            float: none;
+            margin-bottom: 1em;
+        }
+        ul{
+            float: none;
+            padding: 0;
+            li{
+                float:none;
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+
 
 /* sidebar */
 
@@ -181,6 +201,6 @@ input{
 .field_with_errors{
     @extend .has-error;
     .form-control{
-        color: state-danger-text;
+        color: $state-danger-text;
     }
 }

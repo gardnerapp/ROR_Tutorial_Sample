@@ -20,12 +20,13 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end 
     #makes sure we get the right template when the POST is invalid 
     assert_template "users/new"
-    # goes into the users/ new and checks for the errors partial rendering by selecting divs 
-   assert_select 'div#error-explenation' 
-   assert_select 'div.field_with_errors'
-  
+    # goes into the users/ new and checks for the errors partial by selecting divs 
+  assert_select 'div[id=?]', "error-explenation"
+  assert_select 'div[class=?]', "alert alert-danger"
   end 
   
+  
+
   test "valid signup information" do
     get signup_path
     assert_difference 'User.count',1 do 
@@ -39,8 +40,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   end 
   follow_redirect!
   assert_template 'users/show'
-  assert_not flash[:danger] #undefined method 
-  # asserts that the assert error elemts are not being shown
-   assert_select 'div#error-explenation', false
+  assert is_logged_in?
+
 end
 end
