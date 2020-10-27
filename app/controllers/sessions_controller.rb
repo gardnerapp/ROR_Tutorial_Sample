@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   
   def new
+   
   end
   
   def create 
@@ -13,7 +14,7 @@ class SessionsController < ApplicationController
       # creates cookie from login method helpers/sessions_helper.rb
       log_in @user
       params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
-      redirect_to @user
+      redirect_back_or @user 
     else 
       #flash now disappears once there is an additional request 
       flash.now[:danger] = "Invalid email or password"

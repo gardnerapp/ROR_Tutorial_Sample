@@ -10,7 +10,8 @@ module SessionsHelper
         if(user_id = session[:user_id])
             @current_user ||= User.find_by(id: user_id)
         elsif (user_id = cookies.encrypted[:user_id]) # decryption implicit
-        raise #canary for determining if this branch is tested
+      #  raise canary for determining if this branch is tested
+      #when raised is enabled everything is canceled out 
             user = User.find_by(id: user_id)
             #does this part work when creating and thus logging in a new user, No remember token
             #was present 
@@ -30,8 +31,8 @@ module SessionsHelper
      #rembers user in persistent session, stores cookie in browsa
     def remember(user)
         user.remember # a model method creates token and updates attr
-        cookies.permenant.encrypted[:user_id] = user.id #encrypts user id as K/V In cookies hash
-        cookies.permenant[:remember_token] = user.remember_token
+        cookies.permanent.encrypted[:user_id] = user.id #encrypts user id as K/V In cookies hash
+        cookies.permanent[:remember_token] = user.remember_token
     end 
     
     def log_out
@@ -43,7 +44,7 @@ module SessionsHelper
     def forget(user)
         user.forget
         cookies.delete(:user_id)
-        cookies.delet(:remember_token)
+        cookies.delete(:remember_token)
     end 
     
 
